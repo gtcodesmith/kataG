@@ -27,8 +27,20 @@ class KataArraysTest {
         assertArrayEquals(new int[][]{{6,4},{3,7}}, findArrays(nums5,10));
 
         int nums6[] = new int[]{10,0};
-        assertArrayEquals(new int[][]{{10},{10,0}}, findArrays(nums6,10));
+        assertEquals(2, findArrays(nums6,10).length);
+
     }
+
+    @Test
+    public void testArrayMash(){
+        int arr1[] = {1,2,3};
+        int arr2[] = {4,5,6};
+
+        assertArrayEquals(new int[]{1,2,3,4,5,6}, KataArrays.mash(arr1,arr2));
+//        assertArrayEquals(new int[]{1,2,3,4,5,6}, KataArrays.mash(null,arr2));
+
+    }
+
 
 
 

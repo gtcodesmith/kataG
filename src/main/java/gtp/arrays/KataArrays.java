@@ -21,16 +21,11 @@ public class KataArrays {
                     tmp.add(nums[i]);
                     int tot = sumTmp(tmp);
 
-//                    if(tot==0){
-//                        lst.get(lst.get(lst.size()));
-//                    }
-
-                    if(tot==sum){
+                    if(tot==sum || tot==0){
                         lst.add(tmp.stream().mapToInt(Integer::intValue).toArray());
                         tmp.clear();
                     }
                 }
-
             }
 
             return lst.toArray(new int[][]{});
@@ -41,5 +36,12 @@ public class KataArrays {
 
     private static int sumTmp(ArrayList<Integer> tmp) {
         return tmp.stream().reduce(0, Integer::sum);
+    }
+
+    public static int[] mash(int[] arr1, int[] arr2) {
+        int mashed[] = new int[arr1.length+arr2.length];
+        System.arraycopy(arr1,0,mashed,0,arr1.length);
+        System.arraycopy(arr2,0,mashed,arr1.length,arr2.length);
+        return mashed;
     }
 }
