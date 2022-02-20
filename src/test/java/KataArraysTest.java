@@ -17,6 +17,7 @@ class KataArraysTest {
     public void testFindSubArrays() {
         int nums[] = new int[]{10};
         assertNotNull(findArrays(nums, 10));
+        System.out.println(Arrays.deepToString(findArrays(nums, 10)));
         assertTrue(findArrays(nums, 10).length == 1);
     }
 

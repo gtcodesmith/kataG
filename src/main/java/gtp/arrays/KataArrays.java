@@ -14,12 +14,12 @@ public class KataArrays {
 
         if (nums.length > 0) {
             for (int i = 0; i < nums.length; i++) {
-                if (nums[i] == sum) {
-                    int arr[] = new int[]{nums[i]};
-                    processZeroArrays(subArrays, zeroArrays, arr);
-                    subArrays.push(arr);
-                }
-                if (nums[i] < sum) {
+//                if (nums[i] == sum) {
+//                    int arr[] = new int[]{nums[i]};
+//                    processZeroArrays(subArrays, zeroArrays, arr);
+//                    subArrays.push(arr);
+//                }
+//                if (nums[i] < sum) {
                     accum.add(nums[i]);
                     int tot = sumTmp(accum);
 
@@ -40,7 +40,7 @@ public class KataArrays {
                         }
                         accum.clear();
                     }
-                }
+//                }
             }
 
             return subArrays.toArray(new int[][]{});
