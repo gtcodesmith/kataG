@@ -7,32 +7,32 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static gtp.arrays.KataArrays.findArrays;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 class KataArraysTest {
 
     @Test
     public void testFindSubArrays() {
-        int nums[] = new int[]{10};
+        int[] nums = new int[]{10};
         assertNotNull(findArrays(nums, 10));
         System.out.println(Arrays.deepToString(findArrays(nums, 10)));
-        assertTrue(findArrays(nums, 10).length == 1);
+        assertEquals(1, findArrays(nums, 10).length);
     }
 
     @Test
     public void testArrayMash() {
-        int arr1[] = {1, 2, 3};
-        int arr2[] = {4, 5, 6};
+        int[] arr1 = {1, 2, 3};
+        int[] arr2 = {4, 5, 6};
 
         assertArrayEquals(new int[]{1, 2, 3, 4, 5, 6}, KataArrays.mash(arr1, arr2));
     }
 
     @ParameterizedTest
     @MethodSource("srcArr_Sum_ExpectedArr")
-    void testParameterizedFindArrays(int src[], int sum, int expected[][]) {
-        int actual[][]=findArrays(src, sum);
+    void testParameterizedFindArrays(int[] src, int sum, int[][] expected) {
+        int[][] actual =findArrays(src, sum);
         System.out.println(Arrays.deepToString(expected)+"\n"+Arrays.deepToString(actual)+"\n----------------");
         assertArrayEquals(expected, actual);
     }
@@ -79,6 +79,10 @@ class KataArraysTest {
                 arguments(
                         new int[]{10, -10, 10}, 10,
                         new int[][]{{10}, {10,-10,10}}
+                ),
+                arguments(
+                        new int[]{10, 10, 2, -2, 20, -10}, 10,
+                        new int[][]{{10}, {10}, {10, 2, -2},{2, -2, 20, -10}, {20, -10}}
                 )
         );
     }
