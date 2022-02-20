@@ -13,32 +13,35 @@ public class KataArrays {
         ArrayList<Integer> accum = new ArrayList<>();
 
         if (nums.length > 0) {
-            for (int i = 0; i < nums.length; i++) {
+            int tot=0;
+            for (int num : nums) {
 
-                accum.add(nums[i]);
-                int tot = sumTmp(accum);
+                accum.add(num);
+                tot += num;
 
                 if (tot == sum || tot == 0) {
-                    int arr[] = accum.stream().mapToInt(Integer::intValue).toArray();
+                    int[] arr = accum.stream().mapToInt(Integer::intValue).toArray();
                     if (tot == 0) {
+                        zeroArrays.push(arr);
                         if (subArrays.size() > 0) {
-                            int pre[] = subArrays.peek();
-                            int smash[] = mash(pre, arr);
+                            int[] pre = subArrays.peek();
+                            int[] smash = mash(pre, arr);
                             subArrays.push(smash);
                         }
-                        zeroArrays.push(arr);
 
                     } else {
                         if (zeroArrays.size() > 0) {
                             for (int[] zarr : zeroArrays) {
-                                int smash[] = mash(zarr, arr);
+                                int[] smash = mash(zarr, arr);
                                 subArrays.push(smash);
                             }
                             zeroArrays.clear();
                         }
                         subArrays.add(arr);
                     }
+
                     accum.clear();
+                    tot = 0;
                 }
             }
             return subArrays.toArray(new int[][]{});
@@ -46,12 +49,8 @@ public class KataArrays {
             return new int[][]{};
     }
 
-    private static int sumTmp(ArrayList<Integer> tmp) {
-        return tmp.stream().reduce(0, Integer::sum);
-    }
-
     public static int[] mash(int[] arr1, int[] arr2) {
-        int mashed[] = new int[arr1.length + arr2.length];
+        int[] mashed = new int[arr1.length + arr2.length];
         System.arraycopy(arr1, 0, mashed, 0, arr1.length);
         System.arraycopy(arr2, 0, mashed, arr1.length, arr2.length);
         return mashed;
