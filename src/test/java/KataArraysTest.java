@@ -75,6 +75,10 @@ class KataArraysTest {
                 arguments(
                         new int[]{20, -10, 10}, 10,
                         new int[][]{{20, -10}, {10}}
+                ),
+                arguments(
+                        new int[]{10, -10, 10}, 10,
+                        new int[][]{{10}, {10,-10,10}}
                 )
         );
     }

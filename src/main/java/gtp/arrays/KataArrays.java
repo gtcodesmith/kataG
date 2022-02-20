@@ -14,50 +14,36 @@ public class KataArrays {
 
         if (nums.length > 0) {
             for (int i = 0; i < nums.length; i++) {
-//                if (nums[i] == sum) {
-//                    int arr[] = new int[]{nums[i]};
-//                    processZeroArrays(subArrays, zeroArrays, arr);
-//                    subArrays.push(arr);
-//                }
-//                if (nums[i] < sum) {
-                    accum.add(nums[i]);
-                    int tot = sumTmp(accum);
 
-                    if (tot == sum || tot == 0) {
-                        int arr[] = accum.stream().mapToInt(Integer::intValue).toArray();
-                        if (tot == 0) {
-                            if (subArrays.size() > 0) {
-                                int pre[] = subArrays.peek();
-                                int smash[] = mash(pre, arr);
+                accum.add(nums[i]);
+                int tot = sumTmp(accum);
+
+                if (tot == sum || tot == 0) {
+                    int arr[] = accum.stream().mapToInt(Integer::intValue).toArray();
+                    if (tot == 0) {
+                        if (subArrays.size() > 0) {
+                            int pre[] = subArrays.peek();
+                            int smash[] = mash(pre, arr);
+                            subArrays.push(smash);
+                        }
+                        zeroArrays.push(arr);
+
+                    } else {
+                        if (zeroArrays.size() > 0) {
+                            for (int[] zarr : zeroArrays) {
+                                int smash[] = mash(zarr, arr);
                                 subArrays.push(smash);
                             }
-                            zeroArrays.push(arr);
-
-                        } else {
-                            processZeroArrays(subArrays, zeroArrays, arr);
-                            subArrays.add(arr);
-
+                            zeroArrays.clear();
                         }
-                        accum.clear();
+                        subArrays.add(arr);
                     }
-//                }
+                    accum.clear();
+                }
             }
-
             return subArrays.toArray(new int[][]{});
         } else
             return new int[][]{};
-    }
-
-    private static void processZeroArrays(Stack<int[]> subArrays, Stack<int[]> zeroArrays, int[] arr) {
-        if (zeroArrays.size() > 0) {
-
-            for (int[] zarr : zeroArrays) {
-                int smash[] = mash(zarr, arr);
-                subArrays.push(smash);
-            }
-            zeroArrays.clear();
-
-        }
     }
 
     private static int sumTmp(ArrayList<Integer> tmp) {
