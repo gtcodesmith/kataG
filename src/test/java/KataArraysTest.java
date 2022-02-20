@@ -4,6 +4,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,7 +31,9 @@ class KataArraysTest {
     @ParameterizedTest
     @MethodSource("srcArr_Sum_ExpectedArr")
     void testParameterizedFindArrays(int src[], int sum, int expected[][]) {
-        assertArrayEquals(expected, findArrays(src, sum));
+        int actual[][]=findArrays(src, sum);
+        System.out.println(Arrays.deepToString(expected)+"\n"+Arrays.deepToString(actual)+"\n----------------");
+        assertArrayEquals(expected, actual);
     }
 
     static Stream<Arguments> srcArr_Sum_ExpectedArr() {
@@ -59,7 +62,19 @@ class KataArraysTest {
                 arguments(
                         new int[]{10, 0, 10}, 10,
                         new int[][]{{10}, {10, 0}, {0, 10}, {10}}
-                        )
+                        ),
+                arguments(
+                        new int[]{10, 0, 10, 0}, 10,
+                        new int[][]{{10}, {10, 0}, {0, 10}, {10}, {10,0}}
+                ),
+                arguments(
+                        new int[]{5, -5, 10}, 10,
+                        new int[][]{{5, -5, 10}, {10}}
+                ),
+                arguments(
+                        new int[]{20, -10, 10}, 10,
+                        new int[][]{{20, -10}, {10}}
+                )
         );
     }
 
